@@ -12,7 +12,7 @@ class UserSongsController < ApplicationController
   # POST /songs
   # POST /songs.json
   def create
-    @my_song = UserSong.new(usersong_params)
+    @my_song.song = @song
     @my_song.user = current_user
 
     respond_to do |format|
@@ -53,11 +53,11 @@ class UserSongsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_song
-      @my_song = UserSong.find(params[:id])
+      @song = UserSong.find(params[:song_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def usersong_params
-      params.require(:user_songs).permit(:song_id)
+      #params.require(:song).permit(:song_id)
     end
 end
